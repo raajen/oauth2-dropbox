@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Raajen\\OAuth2\\Client\\": "src/"
+            "Raajen\\OAuth2\\Dropbox\\Client\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Raajen\\OAuth2\\Client\\Test\\": "tests/src/"
+            "Raajen\\OAuth2\\Dropbox\\Client\\Test\\": "tests/src/"
         }
     }
 }
