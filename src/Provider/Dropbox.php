@@ -170,12 +170,26 @@ class Dropbox extends AbstractProvider
 	/**
      * Generate a user object from a successful user details request.
      *
-     * @param object $response
-     * @param AccessToken $token
+     * @param  object $response
+     * @param  AccessToken $token
      * @return ResourceOwner
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new ResourceOwner($response);
     }
+
+	/**
+	 * Requests resource owner details.
+	 *
+	 * @param  AccessToken $token
+	 * @return mixed
+	 */
+	protected function fetchResourceOwnerDetails(AccessToken $token)
+	{
+		$url = $this->getResourceOwnerDetailsUrl($token);
+		$request = $this->getAuthenticatedRequest(self::METHOD_POST, $url, $token);
+
+		return $this->getParsedResponse($request);
+	}
 }

@@ -25,5 +25,9 @@
         "psr-4": {
             "Raajen\\OAuth2\\Dropbox\\Client\\Test\\": "tests/src/"
         }
+    },
+    "scripts": {
+        "tests": "vendor/bin/phpunit",
+        "testsVerbose": "@tests -vvv"
     }
 }
