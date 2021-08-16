@@ -66,6 +66,9 @@ class DropboxTest extends TestCase
 		$this->provider->set('approval_prompt', []);
 		$this->provider->set('token_access_type', 'offline');
 
+		/**
+		 * @var string
+		 */
 		$auth_url = $this->provider->getAuthorizationUrl();
 		$parsed_url = parse_url($auth_url);
 		parse_str($parsed_url['query'], $query);
@@ -90,6 +93,10 @@ class DropboxTest extends TestCase
 	{
 		$options = ['scope' => [uniqid(), uniqid()]];
 		$this->provider->setState('some_custom_state');
+
+		/**
+		 * @var string
+		 */
 		$auth_url = $this->provider->getAuthorizationUrl($options);
 		$parsed_url = parse_url($auth_url);
 		parse_str($parsed_url['query'], $url);
@@ -125,14 +132,23 @@ class DropboxTest extends TestCase
 
 	public function testGetAccessToken()
     {
+		/**
+		 * @var object
+		 */
         $response = Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->andReturn('{"access_token": "mock_access_token", "token_type": "bearer", "account_id": "12345"}');
         $response->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
 
+		/**
+		 * @var object
+		 */
         $client = Mockery::mock('GuzzleHttp\ClientInterface');
         $client->shouldReceive('send')->times(1)->andReturn($response);
         $this->provider->setHttpClient($client);
 
+		/**
+		 * @var object
+		 */
         $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 
         $this->assertEquals('mock_access_token', $token->getToken());
@@ -146,14 +162,23 @@ class DropboxTest extends TestCase
 		$name = uniqid();
 		$userId = rand(1000, 9999);
 
+		/**
+		 * @var object
+		 */
 		$postResponse = Mockery::mock('Psr\Http\Message\ResponseInterface');
 		$postResponse->shouldReceive('getBody')->andReturn('{"access_token": "mock_access_token", "token_type": "bearer", "account_id": "12345"}');
 		$postResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
 
+		/**
+		 * @var object
+		 */
 		$userResponse = Mockery::mock('Psr\Http\Message\ResponseInterface');
 		$userResponse->shouldReceive('getBody')->andReturn('{"account_id": "'.$userId.'", "name": {"display_name": "'.$name.'", "familiar_name": "John", "given_name": "John", "surname": "Doe"}, "referral_link": "https://www.dropbox.com/referrals/a1b2c3d4e5f6h7", "country": "US", "locale": "en", "is_paired": false, "team": {"name": "Acme Inc.", "team_id": "dbtid:1234abcd"}, "quota_info": {"shared": 253738410565, "quota": 107374182400000, "normal": 680031877871}}');
 		$userResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
 
+		/**
+		 * @var object
+		 */
 		$client = Mockery::mock('GuzzleHttp\ClientInterface');
 		$client->shouldReceive('send')
 			->times(2)
@@ -162,6 +187,10 @@ class DropboxTest extends TestCase
 		$this->provider->setHttpClient($client);
 
 		$token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+
+		/**
+		 * @var object
+		 */
 		$user = $this->provider->getResourceOwner($token);
 
 		$this->assertEquals($userId, $user->getId());
