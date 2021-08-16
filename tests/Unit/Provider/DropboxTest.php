@@ -151,7 +151,7 @@ class DropboxTest extends TestCase
 		$postResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
 
 		$userResponse = Mockery::mock('Psr\Http\Message\ResponseInterface');
-		$userResponse->shouldReceive('getBody')->andReturn('{"account_id": "'.$userId.'", "display_name": "'.$name.'", "name_details": {"familiar_name": "John", "given_name": "John", "surname": "Doe"}, "referral_link": "https://www.dropbox.com/referrals/a1b2c3d4e5f6h7", "country": "US", "locale": "en", "is_paired": false, "team": {"name": "Acme Inc.", "team_id": "dbtid:1234abcd"}, "quota_info": {"shared": 253738410565, "quota": 107374182400000, "normal": 680031877871}}');
+		$userResponse->shouldReceive('getBody')->andReturn('{"account_id": "'.$userId.'", "name": {"display_name": "'.$name.'", "familiar_name": "John", "given_name": "John", "surname": "Doe"}, "referral_link": "https://www.dropbox.com/referrals/a1b2c3d4e5f6h7", "country": "US", "locale": "en", "is_paired": false, "team": {"name": "Acme Inc.", "team_id": "dbtid:1234abcd"}, "quota_info": {"shared": 253738410565, "quota": 107374182400000, "normal": 680031877871}}');
 		$userResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
 
 		$client = Mockery::mock('GuzzleHttp\ClientInterface');
@@ -167,7 +167,7 @@ class DropboxTest extends TestCase
 		$this->assertEquals($userId, $user->getId());
 		$this->assertEquals($userId, $user->toArray()['account_id']);
 		$this->assertEquals($name, $user->getName());
-		$this->assertEquals($name, $user->toArray()['display_name']);
+		$this->assertEquals($name, $user->toArray()['name']['display_name']);
 	}
 
 }
