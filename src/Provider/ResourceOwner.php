@@ -43,7 +43,7 @@ class ResourceOwner implements ResourceOwnerInterface
 	 */
 	public function getName()
 	{
-		return $this->getValueByKey($this->response, 'name.display_name');
+		return $this->getValueByKey($this->response, 'display_name');
 	}
 
 	/**

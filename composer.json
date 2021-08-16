@@ -23,11 +23,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Raajen\\OAuth2\\Dropbox\\Client\\Test\\": "tests/src/"
+            "Raajen\\OAuth2\\Dropbox\\Client\\Test\\": "tests/Unit/"
         }
     },
     "scripts": {
-        "tests": "vendor/bin/phpunit",
+        "tests": "./vendor/bin/phpunit",
+        "testsCoverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
         "testsVerbose": "@tests -vvv"
     }
 }

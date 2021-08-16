@@ -63,7 +63,7 @@ class Dropbox extends AbstractProvider
 	 * @param array $params
 	 * @return string
 	 */
-	public function getBaseAccessTokenUrl(array $params)
+	public function getBaseAccessTokenUrl(array $params = array())
 	{
 		$base = Dropbox::API_BASE_URL;
 		return "{$base}/oauth2/token";
@@ -75,14 +75,14 @@ class Dropbox extends AbstractProvider
 	 * @param AccessToken $token
 	 * @return string
 	 */
-	public function getResourceOwnerDetailsUrl(AccessToken $token)
+	public function getResourceOwnerDetailsUrl(AccessToken $token = null)
 	{
 		$base = Dropbox::API_BASE_URL;
 		return "{$base}/2/users/get_current_account";
 	}
 
 	/**
-	 * Set the state
+	 * Set the state.
 	 *
 	 * @param string $state
 	 *
@@ -100,6 +100,8 @@ class Dropbox extends AbstractProvider
 	/**
 	 * Sets the argument.
 	 *
+	 * @throws InvalidArgumentException
+	 *
 	 * @param string $key
 	 * @param mixed  $value
 	 *
@@ -108,14 +110,42 @@ class Dropbox extends AbstractProvider
 	public function set($key, $value)
 	{
 		if (!in_array($key, $this->allowed)) {
-			throw new InvalidArgumentException(`The provided key "{$key}" is not allowed`);
+			throw new InvalidArgumentException("The provided key: {$key} is not allowed");
 		}
 
 		$this->args[$key] = $value;
 	}
 
 	/**
+	 * Get all the arguments.
+	 *
+	 * @return array
+	 */
+	public function getArgs()
+	{
+		return $this->args;
+	}
+
+	/**
+	 * Get the value from the args.
+	 *
+	 * @param string $key
+	 *
+	 * @return mixed
+	 */
+	public function get($key)
+	{
+		if (!in_array($key, $this->args)) {
+			return '';
+		}
+
+		return $this->args[$key];
+	}
+
+	/**
 	 * Generates the authorization URL.
+	 *
+	 * @throws NoStateException
 	 *
 	 * @param array $options
 	 * @return void
@@ -126,12 +156,9 @@ class Dropbox extends AbstractProvider
 			throw new NoStateException('Cannot find the state!');
 		}
 
-		$default = [
-			...$this->args,
-			'state' => $this->state,
-		];
+		$default = array_merge($this->args, ['state' => $this->state]);
 
-		return parent::getAuthorizationUrl([...$default, $options]);
+		return parent::getAuthorizationUrl(array_merge($default, $options));
 	}
 
 	/**
@@ -151,9 +178,11 @@ class Dropbox extends AbstractProvider
      * Check a provider response for errors.
      *
      * @link   https://www.dropbox.com/developers/core/docs
+	 *
      * @throws IdentityProviderException
+	 *
      * @param  ResponseInterface $response
-     * @param  string $data Parsed response data
+     * @param  string $data Parsed response data.
      * @return void
      */
     protected function checkResponse(ResponseInterface $response, $data)
@@ -168,7 +197,7 @@ class Dropbox extends AbstractProvider
     }
 
 	/**
-     * Generate a user object from a successful user details request.
+     * Generate an user object from a successful user details request.
      *
      * @param  object $response
      * @param  AccessToken $token
@@ -187,9 +216,11 @@ class Dropbox extends AbstractProvider
 	 */
 	protected function fetchResourceOwnerDetails(AccessToken $token)
 	{
-		$url = $this->getResourceOwnerDetailsUrl($token);
+		$url     = $this->getResourceOwnerDetailsUrl($token);
 		$request = $this->getAuthenticatedRequest(self::METHOD_POST, $url, $token);
 
 		return $this->getParsedResponse($request);
 	}
+
+
 }
