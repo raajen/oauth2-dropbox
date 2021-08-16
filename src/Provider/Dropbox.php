@@ -25,9 +25,9 @@ class Dropbox extends AbstractProvider
 	protected $args = [];
 
 	/**
-     * @var string Key used in the access token response to identify the resource owner.
-     */
-    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'account_id';
+	 * @var string Key used in the access token response to identify the resource owner.
+	 */
+	const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'account_id';
 
 	/**
 	 * @var string API authorization URL.
