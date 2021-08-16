@@ -27,10 +27,9 @@
         }
     },
     "scripts": {
-        "tests": "./vendor/bin/phpunit",
-        "testsCoverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
+        "tests": "XDEBUG_MODE=coverage ./vendor/bin/phpunit",
         "testsVerbose": "@tests -vvv",
-        "phpcs-dev": "./vendor/bin/phpcs --standard=PSR12 --runtime-set testVersion 7 ./src",
-        "phpcbf": "./vendor/bin/phpcbf --standard=PSR12 --runtime-set testVersion 7 ./src"
+        "phpcs-dev": "./vendor/bin/phpcs --standard=PSR2 --runtime-set testVersion 7 ./src",
+        "phpcbf": "./vendor/bin/phpcbf --standard=PSR2 --runtime-set testVersion 7 ./src"
     }
 }
