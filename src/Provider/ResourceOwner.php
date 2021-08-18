@@ -53,7 +53,7 @@ class ResourceOwner implements ResourceOwnerInterface
      */
     public function getEmail()
     {
-        return $this->getValueByKey($this->response, '');
+        return $this->getValueByKey($this->response, 'email');
     }
 
     /**
