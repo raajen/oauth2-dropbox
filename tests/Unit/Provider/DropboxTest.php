@@ -1,12 +1,12 @@
 <?php
 
-namespace Raajen\OAuth2\Dropbox\Client\Test\Provider;
+namespace Raajen\OAuth2\Client\Test\Provider;
 
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 
-use Raajen\OAuth2\Dropbox\Client\Provider\Dropbox;
+use Raajen\OAuth2\Client\Provider\Dropbox;
 
 class DropboxTest extends TestCase
 {
@@ -85,7 +85,7 @@ class DropboxTest extends TestCase
 
 	public function testAuthUrlThrowsException()
 	{
-		$this->expectException('\\Raajen\\OAuth2\\Dropbox\\Client\\Exception\\NoStateException');
+		$this->expectException('\\Raajen\\OAuth2\\Client\\Exception\\NoStateException');
 		$this->provider->getAuthorizationUrl();
 	}
 
