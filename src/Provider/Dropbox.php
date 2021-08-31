@@ -1,6 +1,6 @@
 <?php
 
-namespace Raajen\OAuth2\Dropbox\Client\Provider;
+namespace Raajen\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;

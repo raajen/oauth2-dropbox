@@ -1,6 +1,6 @@
 <?php
 
-namespace Raajen\OAuth2\Dropbox\Client\Exception;
+namespace Raajen\OAuth2\Client\Exception;
 
 use Exception;
 
