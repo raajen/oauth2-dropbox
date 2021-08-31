@@ -7,8 +7,8 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
-use Raajen\OAuth2\Dropbox\Client\Exception\InvalidArgumentException;
-use Raajen\OAuth2\Dropbox\Client\Exception\NoStateException;
+use Raajen\OAuth2\Client\Exception\InvalidArgumentException;
+use Raajen\OAuth2\Client\Exception\NoStateException;
 
 class Dropbox extends AbstractProvider
 {

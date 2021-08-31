@@ -85,7 +85,7 @@ class DropboxTest extends TestCase
 
 	public function testAuthUrlThrowsException()
 	{
-		$this->expectException('\\Raajen\\OAuth2\\Dropbox\\Client\\Exception\\NoStateException');
+		$this->expectException('\\Raajen\\OAuth2\\Client\\Exception\\NoStateException');
 		$this->provider->getAuthorizationUrl();
 	}
 
