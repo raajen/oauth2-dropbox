@@ -1,5 +1,6 @@
 {
     "name": "raajen/oauth2-dropbox",
+    "version": "1.0.3",
     "type": "library",
     "description": "Dropbox Provider for OAuth2 client",
     "license": "MIT",
