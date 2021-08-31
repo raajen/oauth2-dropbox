@@ -11,13 +11,6 @@ To install, use composer:
 ```
 composer require raajen/oauth2-dropbox
 ```
-
-**Note:** Due API deprecation, we dropped support to Dropbox API v1. If you need use v1, please use `^1.0.0` version constraint:
-
-```
-composer require "raajen/oauth2-dropbox:^1.0.0"
-```
-
 ## Usage
 
 Usage is the same as The League's OAuth client, using `\Raajen\OAuth2\Client\Provider\Dropbox` as the provider.
